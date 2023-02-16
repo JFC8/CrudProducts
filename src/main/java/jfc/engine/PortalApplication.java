@@ -11,11 +11,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import jfc.repository.IRepository;
+import jfc.repository.IProductRepository;
 
 @SpringBootApplication(scanBasePackages = {"jfc"})
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
-@EnableMongoRepositories(basePackageClasses = IRepository.class)
+@EnableMongoRepositories(basePackageClasses = IProductRepository.class)
 
 @EntityScan(basePackages = {"jfc.model.entity"} )
 

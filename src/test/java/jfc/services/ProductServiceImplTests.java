@@ -24,22 +24,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
 import jfc.engine.PortalApplication;
-import jfc.engine.TestConfig;
-import jfc.model.entity.Object;
-import jfc.repository.IRepository;
-import jfc.services.Impl.ServiceImpl;
+//import jfc.engine.TestConfig;
+import jfc.model.entity.Product;
+import jfc.repository.IProductRepository;
+import jfc.services.Impl.ProductServiceImpl;
 
 @TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
-@Import(TestConfig.class)
+//@Import(TestConfig.class)
 @SpringBootTest(classes = PortalApplication.class)
-public class ServiceImplTests {
+public class ProductServiceImplTests {
 
 	@InjectMocks
-	private ServiceImpl cService;
+	private ProductServiceImpl cService;
 
 	@Mock
-	private IRepository cRepository;
+	private IProductRepository cRepository;
 
 	@BeforeEach
 	public void setMocks() {
