@@ -2,19 +2,13 @@ package jfc.model.dto;
 
 public class ProductDTO {
 
-	private String id;
 	private String code;
 	private String code2 = null;
 	private String name;
 	private String description;
 	private String description2=null;
 	private String category;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getCode() {
 		return code;
 	}

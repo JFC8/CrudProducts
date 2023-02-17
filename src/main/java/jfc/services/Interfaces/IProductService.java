@@ -11,5 +11,5 @@ public interface IProductService {
 	//public ArrayList<Product> getAllProducts() throws Exception;
 	public ProductDTO getProduct(String code) throws NoProductException;
 	public boolean insertProduct(ProductDTO prod) throws Exception;
-	public boolean deleteProduct(String code) throws Exception;
+	public ProductDTO deleteProduct(String code) throws Exception;
 }

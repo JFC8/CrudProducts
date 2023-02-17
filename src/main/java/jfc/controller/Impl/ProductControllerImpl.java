@@ -35,7 +35,7 @@ public class ProductControllerImpl implements IProductController{
 	
 	@Override
 	@DeleteMapping("/api/products")
-	public boolean deleteProduct(String code) throws Exception{
+	public ProductDTO deleteProduct(String code) throws Exception{
 		return this.cServices.deleteProduct(code);
 	}
 }

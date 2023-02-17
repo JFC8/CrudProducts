@@ -45,15 +45,39 @@ public class ProductServiceImpl implements  IProductService{
 	}
 
 	@Override
-	public boolean insertProduct(ProductDTO prod) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertProduct(ProductDTO prodDTO) throws Exception {
+		Product prod = new Product();
+		
+		prod.setCode(prodDTO.getCode());;
+		prod.setCode2(prodDTO.getCode2());
+		prod.setName(prodDTO.getName());
+		prod.setDescription(prodDTO.getDescription());
+		prod.setDescription2(prodDTO.getDescription2());
+		prod.setCategory(prodDTO.getCategory());
+		
+		try {
+			this.pRepository.insert(prod);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
-	public boolean deleteProduct(String code) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public ProductDTO deleteProduct(String code) throws Exception {
+		Product prod = this.pRepository.deleteProductByCode(code);
+		
+		ProductDTO prodDTO = new ProductDTO();
+		
+		prodDTO.setCode(prod.getCode());
+		prodDTO.setCode2(prod.getCode2());
+		prodDTO.setName(prod.getName());
+		prodDTO.setDescription(prod.getDescription());
+		prodDTO.setDescription2(prod.getDescription2());
+		prodDTO.setCategory(prod.getCategory());
+		
+		return prodDTO;
 	}
 	
 }

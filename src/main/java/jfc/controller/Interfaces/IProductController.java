@@ -6,7 +6,7 @@ public interface IProductController {
 
 	String getProduct(String code) throws Exception;
 	boolean insertProduct(ProductDTO prod) throws Exception;
-	boolean deleteProduct(String code) throws Exception;
+	ProductDTO deleteProduct(String code) throws Exception;
 	
-
+	
 }

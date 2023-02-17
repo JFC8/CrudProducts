@@ -20,10 +20,8 @@ public interface IProductRepository extends MongoRepository<Product, String>{
 	Product findProductByCode(String code);
 	
 	@Query(value= "{code: ?0}", delete = true)
-	void deleteProduct(String code);
+	Product deleteProductByCode(String code);
 
-	/*
-	@Query()
-	void insertProduct(Product p);
-	*/
+	
+	
 }
