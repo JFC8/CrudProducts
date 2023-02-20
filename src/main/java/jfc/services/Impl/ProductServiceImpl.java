@@ -1,6 +1,7 @@
 package jfc.services.Impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,14 +16,26 @@ public class ProductServiceImpl implements  IProductService{
 	@Autowired
 	private IProductRepository pRepository;
 	
-	/*
 	@Override
-	public ArrayList<Product> getAllProducts() throws Exception{
-		ArrayList<Product> toRet = new ArrayList<Product>();
+	public ArrayList<ProductDTO> getAllProducts() throws Exception{
+		List<Product> allProd =  this.pRepository.findAll();
+		ProductDTO prodDTO = new ProductDTO();
+		ArrayList<ProductDTO> retProds = new ArrayList<ProductDTO>();
 		
-		return toRet;
+		for (Product prod : allProd){
+			prodDTO.setCode(prod.getCode());
+			prodDTO.setCode2(prod.getCode2());
+			prodDTO.setName(prod.getName());
+			prodDTO.setDescription(prod.getDescription());
+			prodDTO.setDescription2(prod.getDescription2());
+			prodDTO.setCategory(prod.getCategory());
+			
+			retProds.add(prodDTO);
+		}
+		
+		return retProds;
 	}
-	*/
+	
 	@Override
 	public ProductDTO getProduct(String code) throws NoProductException{
 		Product prod = new Product();

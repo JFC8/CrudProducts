@@ -1,5 +1,7 @@
 package jfc.controller.Impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,20 +24,26 @@ public class ProductControllerImpl implements IProductController{
     private IProductService cServices; 
 	
 	@Override
-	@GetMapping("/api/products")
+	@GetMapping("/api/product")
 	public String getProduct(@RequestParam(required = true)String code) throws Exception {
 		return new Gson().toJson(this.cServices.getProduct(code)); 
 	}
 	
 	@Override
-	@PostMapping("/api/products")
+	@PostMapping("/api/product")
 	public boolean insertProduct(@RequestBody ProductDTO prod) throws Exception {
 		return this.cServices.insertProduct(prod);
 	}
 	
 	@Override
-	@DeleteMapping("/api/products")
+	@DeleteMapping("/api/product")
 	public ProductDTO deleteProduct(String code) throws Exception{
 		return this.cServices.deleteProduct(code);
 	}
+	
+	@Override
+	@GetMapping("/api/products")
+	public ArrayList<ProductDTO> getAllProducts() throws Exception{
+		return this.cServices.getAllProducts();
+	};
 }

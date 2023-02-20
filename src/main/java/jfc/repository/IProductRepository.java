@@ -11,17 +11,10 @@ import jfc.model.entity.Product;
 @Repository
 public interface IProductRepository extends MongoRepository<Product, String>{
 
-	/*
-	@Query()
-	ArrayList<Product> findAllProducts();
-	*/
-
 	@Query("{ 'code' : ?0 }")
 	Product findProductByCode(String code);
 	
 	@Query(value= "{code: ?0}", delete = true)
 	Product deleteProductByCode(String code);
 
-	
-	
 }
