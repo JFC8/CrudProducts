@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,29 +22,35 @@ import jfc.services.Interfaces.IProductService;
 public class ProductControllerImpl implements IProductController{
 
 	@Autowired
-    private IProductService cServices; 
+    private IProductService pServices; 
 	
 	@Override
 	@GetMapping("/api/product")
 	public String getProduct(@RequestParam(required = true)String code) throws Exception {
-		return new Gson().toJson(this.cServices.getProduct(code)); 
+		return new Gson().toJson(this.pServices.getProduct(code)); 
 	}
 	
 	@Override
 	@PostMapping("/api/product")
 	public boolean insertProduct(@RequestBody ProductDTO prod) throws Exception {
-		return this.cServices.insertProduct(prod);
+		return this.pServices.insertProduct(prod);
 	}
 	
 	@Override
 	@DeleteMapping("/api/product")
 	public ProductDTO deleteProduct(String code) throws Exception{
-		return this.cServices.deleteProduct(code);
+		return this.pServices.deleteProduct(code);
 	}
 	
 	@Override
 	@GetMapping("/api/products")
 	public ArrayList<ProductDTO> getAllProducts() throws Exception{
-		return this.cServices.getAllProducts();
+		return this.pServices.getAllProducts();
 	};
+	
+	@Override
+	@PutMapping("/api/product")
+	public ProductDTO updateProduct (ProductDTO prodDTO) throws Exception{
+		return this.pServices.updateProduct(prodDTO);
+	}
 }

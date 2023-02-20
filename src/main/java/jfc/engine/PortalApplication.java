@@ -19,8 +19,6 @@ import jfc.repository.IProductRepository;
 
 @EntityScan(basePackages = {"jfc.model.entity"} )
 
-//@EnableJpaRepositories(basePackages = {"jfc.repository"})
-
 public class PortalApplication extends SpringBootServletInitializer{
 
 	@Override

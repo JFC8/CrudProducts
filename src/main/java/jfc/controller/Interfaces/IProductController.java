@@ -10,5 +10,5 @@ public interface IProductController {
 	boolean insertProduct(ProductDTO prod) throws Exception;
 	ProductDTO deleteProduct(String code) throws Exception;
 	ArrayList<ProductDTO> getAllProducts() throws Exception;
-	
+	ProductDTO updateProduct (ProductDTO prodDTO) throws Exception;
 }
