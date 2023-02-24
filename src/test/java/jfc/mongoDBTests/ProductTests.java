@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -26,6 +27,7 @@ public class ProductTests {
 	public void testInsertProduct() throws Exception {
 		try {
 
+			//TEST CONNECTION
 			MongoClient mongoClient = MongoClients.create(CONNECTION_STRING);
 			MongoDatabase db = mongoClient.getDatabase("CrudProducts");
 			MongoCollection<Document> table = db.getCollection("Products");
@@ -48,7 +50,16 @@ public class ProductTests {
 			document.put("description2", "test_description2");
 			document.put("category", "test_category");
 			table.insertOne(document2);
-
+			
+			Document document3 = new Document();
+			document.put("code", "12345678");
+			document.put("code2", "c2_12345678");
+			document.put("name", "test_product");
+			document.put("description", "test_description");
+			document.put("description2", "test_description2");
+			document.put("category", "test_category");
+			table.insertOne(document3);
+			
 			//CHECK
 			BasicDBObject searchQuery = new BasicDBObject();
 			searchQuery.put("code", "12345");
@@ -67,6 +78,7 @@ public class ProductTests {
 
 		} catch (MongoException e) {
 			e.printStackTrace();
+			fail("There has been an Exception: " + e.getMessage());
 		}
 	}
 
@@ -76,6 +88,7 @@ public class ProductTests {
 	
 		try {
 			
+			//TEST CONNECTION
 			MongoClient mongoClient = MongoClients.create(CONNECTION_STRING);
 			MongoDatabase db = mongoClient.getDatabase("CrudProducts");
 			MongoCollection<Document> table = db.getCollection("Products");
@@ -87,7 +100,7 @@ public class ProductTests {
 	        BasicDBObject newDocument = new BasicDBObject();
 	        //Changing description2
 	        newDocument.put("description2", "new_test_description2");
-	        // Adding a new column. 
+	        // Adding a new column
 	        newDocument.put("characteristics", "test_characteristic");
 	
 	        BasicDBObject updateObj = new BasicDBObject();
@@ -96,7 +109,7 @@ public class ProductTests {
 	
 	        //CHECK
 	        BasicDBObject searchQuery 
-	            = new BasicDBObject().append("name", "author1");
+	            = new BasicDBObject().append("code", "1234567");
 	
 	        MongoCursor<Document> cursor = table.find(searchQuery).cursor();
 	        while (cursor.hasNext()) {
@@ -112,7 +125,49 @@ public class ProductTests {
 	        
 		} catch (MongoException e) {
 			e.printStackTrace();
+			fail("There has been an Exception: " + e.getMessage());
 		}
 	}
+	
+	@Test
+	@Order(3)
+	public void testDeleteProduct() throws Exception{
+		
+		try {
+			
+			//TEST CONNECTION
+			MongoClient mongoClient = MongoClients.create(CONNECTION_STRING);
+			MongoDatabase db = mongoClient.getDatabase("CrudProducts");
+			MongoCollection<Document> table = db.getCollection("Products");
+			
+			//TODO
+			//DELETE
+	        BasicDBObject query = new BasicDBObject();
+	        query.remove("code", "12345678");
+	        
+
+	        //CHECK
+	        BasicDBObject searchQuery 
+	            = new BasicDBObject().append("code", "12345678");
+	
+	        
+	        MongoCursor<Document> cursor = table.find(searchQuery).cursor();
+	        while (cursor.hasNext()) {
+	            Document object = cursor.next();
+	            assertEquals("0", object.get("code").toString());
+				assertEquals("0", object.get("code2").toString());
+				assertEquals("0", object.get("name").toString());
+				assertEquals("0", object.get("description").toString());
+				assertEquals("0", object.get("description2").toString());
+				assertEquals("0", object.get("category").toString());
+				assertEquals("0", object.get("characteristics").toString());
+	        }
+	        
+		} catch (MongoException e) {
+			e.printStackTrace();
+			fail("There has been an Exception: " + e.getMessage());
+		}
+	}
+	
 
 }
