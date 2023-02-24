@@ -12,3 +12,8 @@ Springboot Java simple CRUD to manage products.
 # Instructions
 
     in eclipse, add the project as maven project, configure Mave Goals and make a Maven clean package and run the PortalApplicattion.java class.
+
+
+# //TODO
+
+Pagination getAll; Add Security 
